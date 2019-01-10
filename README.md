@@ -17,7 +17,8 @@ Your Job class should have exactly two public methods. It should not have a publ
 2. public int getStartTime() will return the earliest possible start time for the job. (The very first first start time, for jobs with no pre-requisites, is 0.) If there IS a cycle, and thus the given job can never be started (because it is on the cycle, or something on the cycle must be completed before this job starts), return -1. However, if the job can be started, even if other jobs within the overall schedule cannot be, return a valid time.
 Example: for the following calls, I show the return values expected:
 
-`JobSchedule schedule = new JobSchedule();
+``````````````````````
+JobSchedule schedule = new JobSchedule();
 schedule.addJob(8);  //adds job 0 with time 8
 JobSchedule.Job j1 = schedule.addJob(3);  //adds job 1 with time 3
 schedule.addJob(5);  //adds job 2 with time 5
@@ -39,7 +40,8 @@ schedule.getJob(1).requires(schedule.getJob(0));  //job 0 must precede job 1 (cr
 schedule.minCompletionTime();  //should return -1
 schedule.getJob(0).getStartTime();  //should return -1
 schedule.getJob(1).getStartTime();  //should return -1
-schedule.getJob(2).getStartTime();  //should return 0 (no loops in prerequisites)`
+schedule.getJob(2).getStartTime();  //should return 0 (no loops in prerequisites)
+``````````````````````
 
 1. Your algorithm should look pretty similar to the acyclic single source shortest path one. The primary difference is that, for every node, the initial (default) start time, before any constraints are added, is 0. Instead of relaxing edges to give shorter paths, you are actually "relaxing" constraints to give higher start times. That is, in the example above, the first constraint raises 0's start time because, if 2 starts at its start time 0, and takes 5 to complete, then the start time for 0 is now max(0,5), the previous start time and the new constraint from job 2.
 
